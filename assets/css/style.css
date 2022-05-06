@@ -1,0 +1,93 @@
+/* Utilities */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Arial', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Navbar */
+
+.navbar-container-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: nowrap;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  font-size: 16px;
+}
+
+ul li {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.rules {
+  margin-left: 10px;
+}
+
+/* Puzzle area */
+
+.puzzle-area-row-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 1px;
+  margin-top: 2px;
+}
+
+.tile {
+  background-color: #f4f4f4;
+  border: #111111 1px solid;
+  border-radius: 2px;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  text-align: center;
+  padding-top: 11px;
+}
+
+/* Keyboard panel */
+
+.keyboard-panel-area {
+  font-size: 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+}
+
+.keboard-panel-row {
+  display: flex;
+  gap: 3px;
+  margin-top: 3px;
+  margin-bottom: 3px;
+}
+
+.button {
+  min-width: 42px;
+  min-height: 42px;
+}
+
+.enter-button, .del-button {
+  width: 80px;
+  font-size: 20px;
+}
+
+/* Footer */
+
+footer {
+  border-top: #111111 2px solid;
+  margin-top: auto;
+  text-align: center;
+}
