@@ -74,12 +74,12 @@ ul li {
   margin-bottom: 3px;
 }
 
-.button {
+.letter-button {
   min-width: 42px;
   min-height: 42px;
 }
 
-.enter-button, .del-button {
+#enter-button, #delete-button {
   width: 80px;
   font-size: 20px;
 }

@@ -2,22 +2,20 @@
 // Get the buttons elements and add event listeners
 
 document.addEventListener('DOMContentLoaded', function() {
-  let buttons = document.querySelectorAll('.button');
-  for (let button of buttons) {
-    button.addEventListener('click', function() {
-      if (this.getAttribute('data-type') === 'enter') {
-        alert('Enter pressed');
-      } else if (this.getAttribute('data-type') === 'delete') {
-        alert('Delete pressed');
-      } else {
-        let activePuzzleRow = document.getElementsByClassName('puzzle-area-row-flex')[0].children;
-          if(activePuzzleRow.length > 5) {
-            console.log(activePuzzleRow.length)
-            alert('Too many characters');
-          } else {
-            console.log(`${button.textContent} pressed`)
-          }
-      }
+  let letterButtons = document.querySelectorAll('.letter-button');
+  for (let letterButton of letterButtons) {
+    letterButton.addEventListener('click', function() {
+      console.log(`${letterButton.textContent} pressed`);
     })
   }
-}); 
+  // Enter button
+  let enterButton = document.getElementById('enter-button');
+  enterButton.addEventListener('click', function() {
+    alert('Enter pressed');
+  })
+  // Delete Button
+  let deleteButton = document.getElementById('delete-button');
+  deleteButton.addEventListener('click', function() {
+    alert('Delete pressed');
+  })
+})
