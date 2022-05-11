@@ -64,6 +64,12 @@ document.addEventListener('DOMContentLoaded', function() {
   // Delete Button
   let deleteButton = document.getElementById('delete-button');
   deleteButton.addEventListener('click', function() {
-    alert('Delete was pressed')
+    if(userWord.length) {
+      let letterIndex = userWord.length - 1;
+      insertValue(rowCounter, letterIndex, '')
+      userWord.pop();
+    } else {
+      alert('There is nothing to remove');
+    }
   });
 });
