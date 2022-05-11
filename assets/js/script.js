@@ -51,7 +51,7 @@ function pushLetterValidation(letterButton, userWord) {
   if(userWord.length < 5) {
     let letter = letterButton.innerHTML; 
     userWord.push(letter);
-    let letterIndex = userWord.indexOf(letter);
+    let letterIndex = userWord.length - 1;
     insertValue(rowCounter, letterIndex, letter);
   } else {
     alert('Too many letters. The last letter will be removed. To continue, please, confirm your answer.');
