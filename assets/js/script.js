@@ -3,20 +3,32 @@
 let rowCounter = 1;
 let userWord = [];
 
-//Function that will check the user answer length
+// Function that will insert value to the row
 
-function pushLetter(letterButton, userWord) {
+function insertValue(rowNumber, index, value) {
+  let activeRow = document.querySelector(`#row-${rowNumber}`);
+  let letterInsert = activeRow.children[index];
+  console.log(index)
+  letterInsert.innerHTML = value;
+}
+
+// Function that validate the correct number of letters
+
+function pushLetterValidation(letterButton, userWord) {
   if(userWord.length < 5) {
-    userWord.push(letterButton.innerHTML);
+    let letter = letterButton.innerHTML; 
+    userWord.push(letter);
+    let letterIndex = userWord.indexOf(letter);
+    insertValue(rowCounter, letterIndex, letter)
   } else {
-    alert('Too many letters. The letter x will be removed')
+    alert('Too many letters. The last letter will be removed. To continue, please, confirm your answer.')
     console.log(userWord);
   }
-};
+}
 
-// Function that insert word to row
+// Function that submit word to row
 
-function insertWordToRow(rowNumber, wordArray) {
+function submitAnswer(rowNumber, wordArray) {
     // Currently active row on the board
     let activeRow = document.querySelector(`#row-${rowNumber}`);
     // Add user word into the board
@@ -34,27 +46,24 @@ document.addEventListener('DOMContentLoaded', function() {
   for (let letterButton of letterButtons) {
     letterButton.addEventListener('click', function() {
       console.log(`${letterButton.textContent} pressed`);
-      pushLetter(letterButton, userWord);
+      pushLetterValidation(letterButton, userWord);
     });
   }
   // Enter button
   let enterButton = document.getElementById('enter-button');
   enterButton.addEventListener('click', function() {
-    // Words must be 5 
+    // Words must be 5 characters long
     if(userWord.length === 5) {
-      insertWordToRow(rowCounter, userWord);
+      submitAnswer(rowCounter, userWord);
+      userWord = [];
+      rowCounter = rowCounter + 1;
     } else {
       alert('Word must be 5 characters long');
     };
-    // Clear the user word and change the active row
-    // resetInput(userWord);
-    userWord = [];
-    rowCounter = rowCounter + 1;
   });
   // Delete Button
   let deleteButton = document.getElementById('delete-button');
   deleteButton.addEventListener('click', function() {
-    alert('Delete pressed');
-    userWord.pop();
+    alert('Delete was pressed')
   });
 });
