@@ -84,6 +84,12 @@ ul li {
   font-size: 20px;
 }
 
+/* Part of game functionality */
+
+.redButton {
+  background-color: red;
+}
+
 /* Footer */
 
 footer {

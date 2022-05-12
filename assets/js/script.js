@@ -3,9 +3,16 @@
 let rowCounter = 1;
 let userWord = [];
 let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
-let puzzleWord = Array.from(puzzleWordPool[0])
+let puzzleWord = Array.from(puzzleWordPool[0]);
 let correctAnswers = 0;
 let wrongAnswers = 0;
+
+// Function that will change background color of button to red, if the letter does not appear in the word from the puzzle
+
+function colorButton(wrongLetter) {
+  let letterElement = document.getElementById(`letter-${wrongLetter.toLowerCase()}`);
+  letterElement.classList.add('redButton');
+}
 
 // Function that will check the answer 
 
@@ -28,8 +35,7 @@ function checkAnswer(correctAnswer, userAnswer) {
           console.log('yellow answer');
           console.log(guessedLetter);
         } else {
-          console.log('Nothing');
-          console.log(guessedLetter);
+          colorButton(guessedLetter);
         }
       }
     }
