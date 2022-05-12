@@ -4,8 +4,14 @@ let rowCounter = 1;
 let userWord = [];
 let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
 let puzzleWord = Array.from(puzzleWordPool[0]);
-let correctAnswers = 0;
+let userPoints = 0;
 let wrongAnswers = 0;
+
+//Function that will change the color of tile in the game board depending on the user input and puzzle word
+
+function tileColor(tile, color) {
+    tile.classList.add(`${color}-button`);
+}
 
 // Function that will change background color of button to red, if the letter does not appear in the word from the puzzle
 
@@ -19,24 +25,33 @@ function buttonToRed(wrongLetter) {
 function checkAnswer(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
   if(correctAnswer.toString() === userAnswer.toString()) {
-    correctAnswers = correctAnswers + 1;
+    userPoints = userPoints + 1;
     for(let tile of activeRow.children) {
-      tile.style.backgroundColor = 'green';
+      tileColor(tile, 'green');
     }
   } else {
     for(i = 0; i < userAnswer.length; i++) {
+      console.log(correctAnswer);
       let guessedLetter = userAnswer[i];
       let correctLetter = correctAnswer[i];
       if(guessedLetter === correctLetter) {
-        activeRow.children[i].style.backgroundColor = 'green';
-      } else {
-        let isInAnswer = correctAnswer.indexOf(guessedLetter);
-        if(isInAnswer !== -1) {
-          activeRow.children[i].style.backgroundColor = 'yellow';
-        } else {
-          buttonToRed(guessedLetter);
-        }
-      }
+        // Mark correct letters green and change them to number(disable letter from further search)
+        tileColor(activeRow.children[i], 'green');
+        correctAnswer[i] = 0;
+      } 
+    }
+    for(i = 0; i < userAnswer.length; i++) {
+      console.log(correctAnswer);
+      let guessedLetter = userAnswer[i];
+      let letterIndex = correctAnswer.indexOf(guessedLetter);
+      if(letterIndex !== -1) {
+        // // Mark correct letter but not in their place and change them to number(disable letter from further search)
+        tileColor(activeRow.children[i], 'yellow');
+        correctAnswer[letterIndex] = 0;
+      } 
+      // else {
+      //   buttonToRed(guessedLetter);
+      // }
     }
   }
 }
@@ -93,7 +108,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Words must be 5 characters long
     if(userWord.length === 5) {
       submitAnswer(rowCounter, userWord);
-      checkAnswer(puzzleWord, userWord);
+      checkAnswer(puzzleWord.slice(), userWord);
       userWord = [];
       rowCounter = rowCounter + 1;
     } else {
