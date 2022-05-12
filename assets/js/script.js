@@ -9,33 +9,32 @@ let wrongAnswers = 0;
 
 // Function that will change background color of button to red, if the letter does not appear in the word from the puzzle
 
-function colorButton(wrongLetter) {
+function buttonToRed(wrongLetter) {
   let letterElement = document.getElementById(`letter-${wrongLetter.toLowerCase()}`);
-  letterElement.classList.add('redButton');
+  letterElement.classList.add('red-button');
 }
 
 // Function that will check the answer 
 
 function checkAnswer(correctAnswer, userAnswer) {
-  console.log(correctAnswer);
-  console.log(userAnswer);
+  let activeRow = document.querySelector(`#row-${rowCounter}`);
   if(correctAnswer.toString() === userAnswer.toString()) {
     correctAnswers = correctAnswers + 1;
-    console.log(correctAnswers);
+    for(let tile of activeRow.children) {
+      tile.style.backgroundColor = 'green';
+    }
   } else {
-    console.log('Words are not the same');
     for(i = 0; i < userAnswer.length; i++) {
       let guessedLetter = userAnswer[i];
-      if(guessedLetter === correctAnswer[i]) {
-        console.log('green answer');
-        console.log(guessedLetter);
+      let correctLetter = correctAnswer[i];
+      if(guessedLetter === correctLetter) {
+        activeRow.children[i].style.backgroundColor = 'green';
       } else {
         let isInAnswer = correctAnswer.indexOf(guessedLetter);
         if(isInAnswer !== -1) {
-          console.log('yellow answer');
-          console.log(guessedLetter);
+          activeRow.children[i].style.backgroundColor = 'yellow';
         } else {
-          colorButton(guessedLetter);
+          buttonToRed(guessedLetter);
         }
       }
     }
