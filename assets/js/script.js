@@ -6,7 +6,7 @@ let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
 let puzzleWord = Array.from(puzzleWordPool[0]);
 let userPoints = 0;
 let wrongAnswers = 0;
-
+let gameOver = 0;
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
 function tileColor(tile, color) {
@@ -33,6 +33,51 @@ function checkForCorrectLetter(correctAnswer, userAnswer,) {
     } 
 }}
 
+// Clear Board 
+
+function clearBoard(activeRow) {
+  let puzzleRows = document.querySelectorAll('.puzzle-area-row-flex');
+  for (let tiles of puzzleRows) {
+    let allTiles = tiles.children
+    for (let tile of allTiles) {
+      tile.innerHTML = '';
+      tile.classList.remove('yellow-button');
+      tile.classList.remove('green-button');
+    }
+  }
+}
+
+// Win condition check
+
+function winConditionCheck(activeRow, correctAnswer) {
+  let firstLetter = correctAnswer[0];
+    let fourLetters = correctAnswer.slice(1,5);
+    let fourLettersJoin = fourLetters.join('');
+    let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
+    let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
+    alert(`That is correct ! The puzzle word was ${answerToDisplay}`);
+    userPoints = userPoints + 1;
+    console.log(activeRow)
+    console.log(userPoints);
+    clearBoard(activeRow);
+}
+
+// Game over condition check
+
+function gameOverConditionCheck(activeRow, userAnswer, correctAnswer) {
+  if (userAnswer.toString() !== correctAnswer.toString()) {
+    let firstLetter = correctAnswer[0];
+    let fourLetters = correctAnswer.slice(1,5);
+    let fourLettersJoin = fourLetters.join('');
+    let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
+    let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
+    alert(`You have used all of your tries. The correct answer was ${answerToDisplay}`)
+    wrongAnswers = wrongAnswers + 1;
+    console.log(`Wrong Answers: ${wrongAnswers}`)
+    clearBoard(activeRow);
+  }
+}
+
 // Function that checks letter placement
 
 function checkForLetterPlacement(correctAnswer, userAnswer,) {
@@ -52,10 +97,11 @@ function checkForLetterPlacement(correctAnswer, userAnswer,) {
 function checkAnswer(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
   if(correctAnswer.toString() === userAnswer.toString()) {
-    userPoints = userPoints + 1;
     for(let tile of activeRow.children) {
       tileColor(tile, 'green');
     }
+    winConditionCheck(rowCounter, puzzleWord);
+    rowCounter = 0;
   } else {
     checkForCorrectLetter(correctAnswer, userWord);
     checkForLetterPlacement(correctAnswer, userWord);
@@ -67,7 +113,6 @@ function checkAnswer(correctAnswer, userAnswer) {
 function insertValue(rowNumber, index, value) {
   let activeRow = document.querySelector(`#row-${rowNumber}`);
   let letterInsert = activeRow.children[index];
-  console.log(index);
   letterInsert.innerHTML = value;
 }
 
@@ -115,8 +160,15 @@ document.addEventListener('DOMContentLoaded', function() {
     if(userWord.length === 5) {
       submitAnswer(rowCounter, userWord);
       checkAnswer(puzzleWord.slice(), userWord);
+      // Check for game over condition
+      if(rowCounter > 5) {
+        gameOverConditionCheck(rowCounter, userWord, puzzleWord);
+        rowCounter = 0;
+      }
       userWord = [];
       rowCounter = rowCounter + 1;
+      
+      
     } else {
       alert('Word must be 5 characters long');
     }
