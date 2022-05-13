@@ -20,6 +20,33 @@ function buttonToRed(wrongLetter) {
   letterElement.classList.add('red-button');
 }
 
+// Function that checks if letter is correct
+function checkForCorrectLetter(correctAnswer, userAnswer,) {
+  let activeRow = document.querySelector(`#row-${rowCounter}`);
+  for(i = 0; i < userAnswer.length; i++) {
+    let guessedLetter = userAnswer[i];
+    let correctLetter = correctAnswer[i];
+    if(guessedLetter === correctLetter) {
+      // Mark correct letters green/yellow and change them to number(disable letter from further search)
+      tileColor(activeRow.children[i], 'green');
+      correctAnswer[i] = 0;
+    } 
+}}
+
+// Function that checks letter placement
+
+function checkForLetterPlacement(correctAnswer, userAnswer,) {
+  let activeRow = document.querySelector(`#row-${rowCounter}`);
+  for(i = 0; i < userAnswer.length; i++) {
+    let guessedLetter = userAnswer[i];
+    let letterIndex = correctAnswer.indexOf(guessedLetter);
+      if(letterIndex !== -1) {
+        // // Mark correct letter but not in their place and change them to number(disable letter from further search)
+        tileColor(activeRow.children[i], 'yellow');
+        correctAnswer[letterIndex] = 0;
+}}}
+
+
 // Function that will check the answer 
 
 function checkAnswer(correctAnswer, userAnswer) {
@@ -30,29 +57,8 @@ function checkAnswer(correctAnswer, userAnswer) {
       tileColor(tile, 'green');
     }
   } else {
-    for(i = 0; i < userAnswer.length; i++) {
-      console.log(correctAnswer);
-      let guessedLetter = userAnswer[i];
-      let correctLetter = correctAnswer[i];
-      if(guessedLetter === correctLetter) {
-        // Mark correct letters green and change them to number(disable letter from further search)
-        tileColor(activeRow.children[i], 'green');
-        correctAnswer[i] = 0;
-      } 
-    }
-    for(i = 0; i < userAnswer.length; i++) {
-      console.log(correctAnswer);
-      let guessedLetter = userAnswer[i];
-      let letterIndex = correctAnswer.indexOf(guessedLetter);
-      if(letterIndex !== -1) {
-        // // Mark correct letter but not in their place and change them to number(disable letter from further search)
-        tileColor(activeRow.children[i], 'yellow');
-        correctAnswer[letterIndex] = 0;
-      } 
-      // else {
-      //   buttonToRed(guessedLetter);
-      // }
-    }
+    checkForCorrectLetter(correctAnswer, userWord);
+    checkForLetterPlacement(correctAnswer, userWord);
   }
 }
 
