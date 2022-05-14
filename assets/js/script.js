@@ -7,17 +7,21 @@ let puzzleWord = Array.from(puzzleWordPool[0]);
 let userPoints = 0;
 let wrongAnswers = 0;
 let gameOver = 0;
+
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
 function tileColor(tile, color) {
     tile.classList.add(`${color}-button`);
 }
 
+
 // Function that will change background color of button to red, if the letter does not appear in the word from the puzzle
 
-function buttonToRed(wrongLetter) {
+function buttonToRed(wrongLetter, correctLetter, puzzleArray) {
   let letterElement = document.getElementById(`letter-${wrongLetter.toLowerCase()}`);
-  letterElement.classList.add('red-button');
+  if(puzzleArray.includes(wrongLetter) === false) {
+    letterElement.classList.add('red-button');
+  }
 }
 
 // Function that checks if letter is correct
@@ -29,21 +33,28 @@ function checkForCorrectLetter(correctAnswer, userAnswer,) {
     if(guessedLetter === correctLetter) {
       // Mark correct letters green/yellow and change them to number(disable letter from further search)
       tileColor(activeRow.children[i], 'green');
-      correctAnswer[i] = 0;
-    } 
-}}
+      correctAnswer[i] = 0; 
+    } else {
+      buttonToRed(guessedLetter, correctLetter, puzzleWord);
+    }
+}
+}
 
 // Clear Board 
 
 function clearBoard(activeRow) {
   let puzzleRows = document.querySelectorAll('.puzzle-area-row-flex');
   for (let tiles of puzzleRows) {
-    let allTiles = tiles.children
+    let allTiles = tiles.children;
     for (let tile of allTiles) {
       tile.innerHTML = '';
       tile.classList.remove('yellow-button');
       tile.classList.remove('green-button');
     }
+  }
+  let keyboardButtons = document.querySelectorAll('.letter-button');
+  for (let button of keyboardButtons) {
+    button.classList.remove('red-button');
   }
 }
 
@@ -57,7 +68,7 @@ function winConditionCheck(activeRow, correctAnswer) {
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
     alert(`That is correct ! The puzzle word was ${answerToDisplay}`);
     userPoints = userPoints + 1;
-    console.log(activeRow)
+    console.log(activeRow);
     console.log(userPoints);
     clearBoard(activeRow);
 }
@@ -71,16 +82,16 @@ function gameOverConditionCheck(activeRow, userAnswer, correctAnswer) {
     let fourLettersJoin = fourLetters.join('');
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
-    alert(`You have used all of your tries. The correct answer was ${answerToDisplay}`)
+    alert(`You have used all of your tries. The correct answer was ${answerToDisplay}`);
     wrongAnswers = wrongAnswers + 1;
-    console.log(`Wrong Answers: ${wrongAnswers}`)
+    console.log(`Wrong Answers: ${wrongAnswers}`);
     clearBoard(activeRow);
   }
 }
 
 // Function that checks letter placement
 
-function checkForLetterPlacement(correctAnswer, userAnswer,) {
+function checkForLetterPlacement(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
   for(i = 0; i < userAnswer.length; i++) {
     let guessedLetter = userAnswer[i];
