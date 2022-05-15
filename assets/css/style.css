@@ -13,6 +13,18 @@ body {
   min-height: 100vh;
 }
 
+.margin-top-10px {
+  margin-top: 10px;
+}
+
+.margin-left-5px {
+  margin-left: 5px;
+}
+
+.text-align-left {
+  text-align: left;
+}
+
 /* Navbar */
 
 .navbar-container-flex {
@@ -30,7 +42,7 @@ ul li {
   margin-right: 10px;
 }
 
-.rules {
+#rules {
   margin-left: 10px;
 }
 
@@ -103,18 +115,33 @@ ul li {
   font-size: 14px;
 }
 
-/* Part of game functionality */
+/* Part of game functionality and popups*/
 
-.red-button {
+.red-button, .red-background {
   background-color: red;
 }
 
-.green-button {
+.green-button, .green-background {
   background-color: green;
 }
 
-.yellow-button {
+.yellow-button, .yellow-background {
   background-color: yellow;
+}
+
+.grey-background {
+  background-color: gray;
+}
+
+.letter-button-example {
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+  border: #111111 1px solid;
+}
+
+.html-container-height {
+  height: 60vh;
 }
 
 /* Footer */
