@@ -6,7 +6,6 @@ let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
 let puzzleWord = Array.from(puzzleWordPool[0]);
 let userPoints = 0;
 let wrongAnswers = 0;
-
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
 function tileColor(tile, color) {
@@ -41,7 +40,7 @@ function checkForCorrectLetter(correctAnswer, userAnswer,) {
 
 // Clear Board 
 
-function clearBoard(activeRow) {
+function clearBoard() {
   let puzzleRows = document.querySelectorAll('.puzzle-area-row-flex');
   for (let tiles of puzzleRows) {
     let allTiles = tiles.children;
@@ -59,7 +58,7 @@ function clearBoard(activeRow) {
 
 // Win condition check
 
-function winConditionCheck(activeRow, correctAnswer) {
+function winConditionCheck(correctAnswer) {
   let firstLetter = correctAnswer[0];
     let fourLetters = correctAnswer.slice(1,5);
     let fourLettersJoin = fourLetters.join('');
@@ -67,14 +66,14 @@ function winConditionCheck(activeRow, correctAnswer) {
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
     swalConfirm(`That is correct ! The puzzle word was ${answerToDisplay}`);
     userPoints = userPoints + 1;
-    console.log(activeRow);
-    console.log(userPoints);
-    clearBoard(activeRow);
+    console.log('My points')
+    console.log(userPoints)
+    clearBoard();
 }
 
 // Game over condition check
 
-function gameOverConditionCheck(activeRow, userAnswer, correctAnswer) {
+function gameOverConditionCheck(userAnswer, correctAnswer) {
   if (userAnswer.toString() !== correctAnswer.toString()) {
     let firstLetter = correctAnswer[0];
     let fourLetters = correctAnswer.slice(1,5);
@@ -84,7 +83,7 @@ function gameOverConditionCheck(activeRow, userAnswer, correctAnswer) {
     swalWarning(`You have used all of your tries. The correct answer was ${answerToDisplay}`);
     wrongAnswers = wrongAnswers + 1;
     console.log(`Wrong Answers: ${wrongAnswers}`);
-    clearBoard(activeRow);
+    clearBoard();
   }
 }
 
@@ -110,7 +109,7 @@ function checkAnswer(correctAnswer, userAnswer) {
     for(let tile of activeRow.children) {
       tileColor(tile, 'green');
     }
-    winConditionCheck(rowCounter, puzzleWord);
+    winConditionCheck(puzzleWord);
     rowCounter = 0;
   } else {
     checkForCorrectLetter(correctAnswer, userWord);
@@ -151,10 +150,10 @@ function submitAnswer(rowNumber, wordArray) {
     }
 }
 
-// Wait for the DOM finish loading 
-// Get the buttons elements and add event listeners
 
-document.addEventListener('DOMContentLoaded', function() {
+// Function that will get the enter and delete buttons elements and add event listeners
+
+function initiateButtonsActions() {
   let letterButtons = document.querySelectorAll('.letter-button');
   for (let letterButton of letterButtons) {
     letterButton.addEventListener('click', function() {
@@ -171,7 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
       checkAnswer(puzzleWord.slice(), userWord);
       // Check for game over condition
       if(rowCounter > 5) {
-        gameOverConditionCheck(rowCounter, userWord, puzzleWord);
+        gameOverConditionCheck(userWord, puzzleWord);
         rowCounter = 0;
       }
       userWord = [];
@@ -191,11 +190,12 @@ document.addEventListener('DOMContentLoaded', function() {
       swalError('There is nothing to remove');
     }
   });
-});
+}
+
 
 // This function will bring rules popup
 
-function rulesAlert() {
+function rulesSwalAlert() {
   let rulesHTML = `
 <div class="puzzle-area">
   <div class="puzzle-area-row-flex">
@@ -278,13 +278,38 @@ function swalWarning(text) {
   });
 }
 
+function swalStatistics() {
+  let statisticsHTML =`
+ <p>Placeholder</p>`;
+  Swal.fire({
+    title: 'Statistics',
+    html: statisticsHTML,
+    allowOutsideClick: false,
+    confirmButtonColor: '#1DB954',
+    confirmButtonText: 'OK',
+    allowEscapeKey: false,
+  });
+}
+
 //  Wait for the DOM finish loading 
-// Get the rules element, add event listener,  SweetAlert modal
+// Get the rules and statistics element, add event listeners,  SweetAlert modals
 
 document.addEventListener('DOMContentLoaded', function() {
+  // Rules
   let rulesInfo = document.getElementById('rules');
   rulesInfo.addEventListener('click', function() {
-    rulesAlert();
+    rulesSwalAlert();
   });
+  // Stats 
+  let statistics = document.getElementById('statistics');
+  statistics.addEventListener('click', function() {
+    swalStatistics();
+  })
 });
 
+//  Wait for the DOM finish loading , start the game
+
+document.addEventListener('DOMContentLoaded', function() {
+  let continueGame = true;
+  initiateButtonsActions();
+});
