@@ -6,7 +6,6 @@ let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
 let puzzleWord = Array.from(puzzleWordPool[0]);
 let userPoints = 0;
 let wrongAnswers = 0;
-let gameOver = 0;
 
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
@@ -66,7 +65,7 @@ function winConditionCheck(activeRow, correctAnswer) {
     let fourLettersJoin = fourLetters.join('');
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
-    alert(`That is correct ! The puzzle word was ${answerToDisplay}`);
+    swalConfirm(`That is correct ! The puzzle word was ${answerToDisplay}`);
     userPoints = userPoints + 1;
     console.log(activeRow);
     console.log(userPoints);
@@ -82,7 +81,7 @@ function gameOverConditionCheck(activeRow, userAnswer, correctAnswer) {
     let fourLettersJoin = fourLetters.join('');
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
-    alert(`You have used all of your tries. The correct answer was ${answerToDisplay}`);
+    swalWarning(`You have used all of your tries. The correct answer was ${answerToDisplay}`);
     wrongAnswers = wrongAnswers + 1;
     console.log(`Wrong Answers: ${wrongAnswers}`);
     clearBoard(activeRow);
@@ -136,8 +135,7 @@ function pushLetterValidation(letterButton, userWord) {
     let letterIndex = userWord.length - 1;
     insertValue(rowCounter, letterIndex, letter);
   } else {
-    alert('Too many letters. The last letter will be removed. To continue, please, confirm your answer.');
-    console.log(userWord);
+    swalError('Too many letters. To continue, please, confirm your answer.');
   }
 }
 
@@ -178,10 +176,8 @@ document.addEventListener('DOMContentLoaded', function() {
       }
       userWord = [];
       rowCounter = rowCounter + 1;
-      
-      
     } else {
-      alert('Word must be 5 characters long');
+      swalError('Word must be 5 characters long or word does not exist');
     }
   });
   // Delete Button
@@ -192,13 +188,15 @@ document.addEventListener('DOMContentLoaded', function() {
       insertValue(rowCounter, letterIndex, '');
       userWord.pop();
     } else {
-      alert('There is nothing to remove');
+      swalError('There is nothing to remove');
     }
   });
 });
 
-// HTML for Rules
-let rulesHTML = `
+// This function will bring rules popup
+
+function rulesAlert() {
+  let rulesHTML = `
 <div class="puzzle-area">
   <div class="puzzle-area-row-flex">
     <div class="tile yellow-background">W</div>
@@ -228,23 +226,65 @@ let rulesHTML = `
 </div>
 `;
 
+  Swal.fire({
+    customClass: {
+      htmlContainer: 'html-container-height',
+    },
+    icon: 'info',
+    width: '1000px',
+    html: rulesHTML,
+    confirmButtonColor: '#3085d6',
+    confirmButtonText: 'Ok, got it!',
+    allowOutsideClick: false,
+    allowEscapeKey: false,
+  });
+}
+
+// This function will bring up the SweetAlert2 popup with desired text
+
+function swalError(text) {
+  Swal.fire({
+    icon: 'error',
+    title: 'Error',
+    text: `${text}`,
+    allowOutsideClick: false,
+    confirmButtonColor: '#FF0000',
+    allowEscapeKey: false,
+  });
+}
+
+// This function will bring up the SweetAlert2 confirmation popup with desired text
+
+function swalConfirm(text) {
+  Swal.fire({
+    icon: 'success',
+    title: 'Good Job',
+    text: `${text}`,
+    allowOutsideClick: false,
+    confirmButtonColor: '#1DB954',
+    allowEscapeKey: false,
+  });
+}
+
+function swalWarning(text) {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Game Over',
+    text: `${text}`,
+    allowOutsideClick: false,
+    confirmButtonColor: '#facea8',
+    confirmButtonText: 'Try again',
+    allowEscapeKey: false,
+  });
+}
+
 //  Wait for the DOM finish loading 
 // Get the rules element, add event listener,  SweetAlert modal
 
 document.addEventListener('DOMContentLoaded', function() {
   let rulesInfo = document.getElementById('rules');
   rulesInfo.addEventListener('click', function() {
-    Swal.fire({
-      customClass: {
-        htmlContainer: 'html-container-height',
-      },
-      icon: 'info',
-      width: '1000px',
-      html: rulesHTML,
-      confirmButtonColor: '#3085d6',
-      confirmButtonText: 'Ok, got it!',
-      allowOutsideClick: false,
-      allowEscapeKey: false,
-    });
+    rulesAlert();
   });
 });
+
