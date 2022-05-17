@@ -156,6 +156,21 @@ function submitAnswer(rowNumber, wordArray) {
 }
 
 
+function requestToDictionaryAPI(word) {
+  var request = new XMLHttpRequest();
+  request.open('GET', `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`, false);  // `false` makes the request synchronous
+  request.send(null);
+  return request.status
+}
+
+function isValidWord(word) {
+ let status = requestToDictionaryAPI(word.join(''));
+ if(status === 200) {
+  return true;
+ }
+ return false;
+}
+
 // Function that will get the enter and delete buttons elements and add event listeners
 
 function initiateButtonsActions() {
@@ -171,17 +186,21 @@ function initiateButtonsActions() {
   enterButton.addEventListener('click', function() {
     // Words must be 5 characters long
     if(userWord.length === 5) {
-      submitAnswer(rowCounter, userWord);
-      checkAnswer(puzzleWord.slice(), userWord);
-      // Check for game over condition
-      if(rowCounter > 5) {
-        gameOverConditionCheck(userWord, puzzleWord);
-        rowCounter = 0;
+      if(isValidWord(userWord)) {
+        submitAnswer(rowCounter, userWord);
+        checkAnswer(puzzleWord.slice(), userWord);
+        // Check for game over condition
+        if(rowCounter > 5) {
+          gameOverConditionCheck(userWord, puzzleWord);
+          rowCounter = 0;
+        }
+        userWord = [];
+        rowCounter = rowCounter + 1;
+      } else {
+        swalError('It must be a valid word')
       }
-      userWord = [];
-      rowCounter = rowCounter + 1;
     } else {
-      swalError('Word must be 5 characters long or word does not exist');
+      swalError('Word must be 5 characters long.');
     }
   });
   // Delete Button
