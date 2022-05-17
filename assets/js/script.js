@@ -4,8 +4,8 @@ let rowCounter = 1;
 let userWord = [];
 let puzzleWordPool = ['WORLD', 'SMELL', 'PRIDE'];
 let puzzleWord = Array.from(puzzleWordPool[0]);
-let userPoints = 0;
-let wrongAnswers = 0;
+let playerId;
+
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
 function tileColor(tile, color) {
@@ -65,9 +65,11 @@ function winConditionCheck(correctAnswer) {
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
     swalConfirm(`That is correct ! The puzzle word was ${answerToDisplay}`);
-    userPoints = userPoints + 1;
-    console.log('My points')
-    console.log(userPoints)
+    console.log(playerId);
+    player = getPlayerById(playerId);
+    console.log(player);
+    player.score++;
+    updatePlayer(player);
     clearBoard();
 }
 
@@ -80,9 +82,12 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
     let fourLettersJoin = fourLetters.join('');
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
+    player = getPlayerById(playerId);
+    console.log(player);
+    player.endTime = new Date().getTime();
+    player.gameTime = (player.endTime - player.startTime)/1000;
+    updatePlayer(player);
     swalWarning(`You have used all of your tries. The correct answer was ${answerToDisplay}`);
-    wrongAnswers = wrongAnswers + 1;
-    console.log(`Wrong Answers: ${wrongAnswers}`);
     clearBoard();
   }
 }
@@ -193,101 +198,30 @@ function initiateButtonsActions() {
 }
 
 
-// This function will bring rules popup
+// Function that will display SweetAlert, capture user input and push it to local storage
 
-function rulesSwalAlert() {
-  let rulesHTML = `
-<div class="puzzle-area">
-  <div class="puzzle-area-row-flex">
-    <div class="tile yellow-background">W</div>
-    <div class="tile">O</div>
-    <div class="tile green-background">R</div>
-    <div class="tile">L</div>
-    <div class="tile">D</div>
-  </div>
-</div>
-<div class="margin-top-10px">
-  <p class="text-align-left margin-top-10px">1. The objective of the game is to guess the correct word in 6 tries.</p>
-  <p class="text-align-left margin-top-10px">2. Each guess must be a valid five-letter english word.</p>
-  <p class="text-align-left margin-top-10px">3. After each try, the letters will be coloured accordingly on the puzzle board or the keyboard panel.</p>
-  <p class="margin-top-10px">Considering the example above:</p>
-  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word and is on its place, the tile will be coloured on green (Tile with letter R).</p>
-  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word but not on its place, the tile will coloured on yellow (Tile with letter W).</p>
-  <p class="text-align-left margin-top-10px">If the letter is not in the puzzle word, the corresponding buttons on the keyboard panel will be coloured on red.</p>
-  <div class="margin-top-10px">
-    <span class="letter-button-example red-background">O</span>
-    <span class="letter-button-example red-background">L</span>
-    <span class="letter-button-example red-background">D</span>
-  </div>
-  <div class="margin-top-10px">
-    <p class="text-align-left margin-top-10px">To confirm your answer, click on the button with the following symbol<i class="fa-solid fa-right-to-bracket margin-left-5px"></i></p>
-    <p class="text-align-left margin-top-10px">To remove 1 letter from your guess, use the button with the following symbol<i class="fa-solid fa-delete-left margin-left-5px"></i></p>
-  </div>
-</div>
-`;
-
+function swalInput(id) {
   Swal.fire({
-    customClass: {
-      htmlContainer: 'html-container-height',
-    },
-    icon: 'info',
-    width: '1000px',
-    html: rulesHTML,
-    confirmButtonColor: '#3085d6',
-    confirmButtonText: 'Ok, got it!',
-    allowOutsideClick: false,
-    allowEscapeKey: false,
-  });
-}
-
-// This function will bring up the SweetAlert2 popup with desired text
-
-function swalError(text) {
-  Swal.fire({
-    icon: 'error',
-    title: 'Error',
-    text: `${text}`,
-    allowOutsideClick: false,
-    confirmButtonColor: '#FF0000',
-    allowEscapeKey: false,
-  });
-}
-
-// This function will bring up the SweetAlert2 confirmation popup with desired text
-
-function swalConfirm(text) {
-  Swal.fire({
-    icon: 'success',
-    title: 'Good Job',
-    text: `${text}`,
-    allowOutsideClick: false,
+    title: 'Choose your username',
+    html: `<input type="text" id="username" class="swal2-input" placeholder="Username">`,
+    confirmButtonText: "I'm, ready",
     confirmButtonColor: '#1DB954',
-    allowEscapeKey: false,
-  });
-}
-
-function swalWarning(text) {
-  Swal.fire({
-    icon: 'warning',
-    title: 'Game Over',
-    text: `${text}`,
+    focusConfirm: false,
     allowOutsideClick: false,
-    confirmButtonColor: '#facea8',
-    confirmButtonText: 'Try again',
     allowEscapeKey: false,
-  });
-}
-
-function swalStatistics() {
-  let statisticsHTML =`
- <p>Placeholder</p>`;
-  Swal.fire({
-    title: 'Statistics',
-    html: statisticsHTML,
-    allowOutsideClick: false,
-    confirmButtonColor: '#1DB954',
-    confirmButtonText: 'OK',
-    allowEscapeKey: false,
+    preConfirm: () => {
+      let input = Swal.getPopup().querySelector('#username').value;
+      if (!input) {
+        Swal.showValidationMessage(`Please enter your username`);
+      }
+      return input;
+    }
+  }).then((input) => {
+    players = getPlayers();
+    player = getPlayerById(id);
+    player.name = input.value;
+    player.startTime = new Date().getTime();
+    updatePlayer(player);
   });
 }
 
@@ -304,12 +238,74 @@ document.addEventListener('DOMContentLoaded', function() {
   let statistics = document.getElementById('statistics');
   statistics.addEventListener('click', function() {
     swalStatistics();
-  })
+  });
 });
 
 //  Wait for the DOM finish loading , start the game
 
 document.addEventListener('DOMContentLoaded', function() {
-  let continueGame = true;
+  // Initiate local storage when one does not exist
+  if (!localStorage.Players) {
+    localStorage.Players = JSON.stringify([]);
+  }
+  let newPlayer = createNewPlayer();
+  playerId = newPlayer.id;
+  swalInput(newPlayer.id);
   initiateButtonsActions();
 });
+
+// Create new Player
+
+function createNewPlayer() {
+  players = getPlayers();
+  let lastId = 0;
+  if(players.length) {
+    lastId =  players.at(-1).id;
+  }
+  let newPlayer = {
+    id: lastId + 1,
+    name: '',
+    score: 0,
+    gameTime: 0,
+  };
+  savePlayer(newPlayer);
+  return newPlayer;
+}
+
+// Get players
+
+function getPlayers() {
+  return JSON.parse(localStorage.Players);
+}
+
+// Save players
+
+function savePlayer(newPlayer) {
+  players = getPlayers();
+  players.push(newPlayer);
+  savePlayers(players);
+}
+
+// Update player
+
+function updatePlayer(updatedPlayer) {
+  players = players.map(player => player.id !== updatedPlayer.id ? player : updatedPlayer);
+  savePlayers(players);
+}
+
+// Save player
+
+function savePlayers(players) {
+  localStorage.Players = JSON.stringify(players);
+}
+
+// Get player by Id
+
+function getPlayerById(id) {
+  players = getPlayers();
+  for(let player of players) {
+    if(player.id == id) {
+         return player;
+        }
+  }
+}
