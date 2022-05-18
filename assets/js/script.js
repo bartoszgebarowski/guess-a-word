@@ -231,7 +231,11 @@ function initiateButtonsActions() {
 function swalInput(id) {
   Swal.fire({
     title: "Choose your username",
-    html: `<input type="text" id="username" class="swal2-input" placeholder="Username">`,
+    html: `<input type="text" id="username" class="swal-custom-input" placeholder="Username">`,
+    customClass: {
+      htmlContainer: "swal-custom-html-container",
+      input: "swal-custom-input",
+    },
     confirmButtonText: "I'm, ready",
     confirmButtonColor: "#1DB954",
     focusConfirm: false,
@@ -241,6 +245,9 @@ function swalInput(id) {
       let input = Swal.getPopup().querySelector("#username").value;
       if (!input) {
         Swal.showValidationMessage(`Please enter your username`);
+      }
+      if (input.length > 12) {
+        Swal.showValidationMessage(`Max 12 characters`);
       }
       return input;
     },

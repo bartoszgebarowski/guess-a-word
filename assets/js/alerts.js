@@ -31,7 +31,7 @@ function rulesSwalAlert() {
 
   Swal.fire({
     customClass: {
-      htmlContainer: "html-container-height",
+      htmlContainer: "swal-custom-html-container-height",
     },
     icon: "info",
     width: "1000px",

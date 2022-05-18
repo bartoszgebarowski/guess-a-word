@@ -4,7 +4,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', 'Arial', sans-serif;
+  font-family: "Roboto", "Arial", sans-serif;
 }
 
 body {
@@ -122,7 +122,8 @@ ul li {
   font-size: 14px;
 }
 
-#enter-button, #delete-button {
+#enter-button,
+#delete-button {
   width: 10%;
   height: 40px;
   min-width: 40px;
@@ -132,15 +133,18 @@ ul li {
 
 /* Part of game functionality and popups*/
 
-.red-button, .red-background {
+.red-button,
+.red-background {
   background-color: red;
 }
 
-.green-button, .green-background {
+.green-button,
+.green-background {
   background-color: green;
 }
 
-.yellow-button, .yellow-background {
+.yellow-button,
+.yellow-background {
   background-color: yellow;
 }
 
@@ -155,8 +159,16 @@ ul li {
   border: #111111 1px solid;
 }
 
-.html-container-height {
+.swal-custom-html-container-height {
   height: 60vh;
+}
+
+.swal-custom-input {
+  margin: 0;
+  width: 80%;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
 }
 
 /* Footer */
@@ -171,7 +183,8 @@ footer {
 /* Media queries */
 
 @media screen and (min-width: 860px) {
-  #delete-button, #enter-button {
+  #delete-button,
+  #enter-button {
     font-size: 24px;
   }
 }
