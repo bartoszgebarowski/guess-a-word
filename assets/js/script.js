@@ -173,23 +173,15 @@ function submitAnswer(rowNumber, wordArray) {
   }
 }
 
-function requestToDictionaryAPI(word) {
-  var request = new XMLHttpRequest();
-  request.open(
-    "GET",
-    `https://api.dictionaryapi.dev/api/v2/entries/en/${word}`,
-    false
-  ); // `false` makes the request synchronous
-  request.send(null);
-  return request.status;
-}
+// Function that will check if the word is in API database
 
 function isValidWord(word) {
-  let status = requestToDictionaryAPI(word.join(""));
-  if (status === 200) {
+  let wordToCheck = word.join("").toLowerCase();
+  if (gameWords.includes(wordToCheck)) {
     return true;
+  } else {
+    return false;
   }
-  return false;
 }
 
 // Function that will get the enter and delete buttons elements and add event listeners
