@@ -2,10 +2,17 @@
 
 let rowCounter = 1;
 let userWord = [];
-let puzzleWordPool = ["WORLD", "SMELL", "PRIDE"];
-let puzzleWord = Array.from(puzzleWordPool[0]);
+console.log(gameWords);
+let puzzleWord = randomize(gameWords);
 let playerId;
-let scoreBoard = [];
+console.log(puzzleWord);
+
+// This function will return one word from API database (open source)
+
+function randomize(words) {
+  let shuffledWords = words[Math.floor(Math.random() * words.length)];
+  return Array.from(shuffledWords.toUpperCase());
+}
 
 //Function that will change the color of tile in the game board depending on the user input and puzzle word
 
@@ -74,6 +81,8 @@ function winConditionCheck(correctAnswer) {
   player.endTime = new Date().getTime();
   player.gameTime = (player.endTime - player.startTime) / 1000;
   updatePlayer(player);
+  puzzleWord = randomize(gameWords);
+  console.log(puzzleWord);
   clearBoard();
 }
 
@@ -94,6 +103,8 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
     swalWarning(
       `You have used all of your tries. The correct answer was ${answerToDisplay}`
     );
+    puzzleWord = randomize(gameWords);
+    console.log(puzzleWord);
     clearBoard();
   }
 }
