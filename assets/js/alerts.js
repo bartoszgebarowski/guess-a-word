@@ -1,3 +1,6 @@
+/**
+ * Shows the rule of the game, and determines the properties of SweetAlert2 modal
+ **/
 function rulesSwalAlert() {
   let rulesHTML = `
 <div class="puzzle-area">
@@ -43,10 +46,9 @@ function rulesSwalAlert() {
   });
 }
 
-// This function will bring rules popup
-
-// This function will bring up the SweetAlert2 popup with desired text
-
+/**
+ * Determines the properties of SweetAlert2 error message
+ **/
 function swalError(text) {
   Swal.fire({
     icon: "error",
@@ -58,8 +60,9 @@ function swalError(text) {
   });
 }
 
-// This function will bring up the SweetAlert2 confirmation popup with desired text
-
+/**
+ * Determines the properties of SweetAlert2 confirm message
+ **/
 function swalConfirm(text) {
   Swal.fire({
     icon: "success",
@@ -71,6 +74,9 @@ function swalConfirm(text) {
   });
 }
 
+/**
+ * Determines the properties of SweetAlert2 warning message
+ **/
 function swalWarning(text) {
   Swal.fire({
     icon: "warning",
@@ -83,8 +89,9 @@ function swalWarning(text) {
   });
 }
 
-//////
-
+/**
+ * Determines the properties of SweetAlert2 statistics
+ **/
 function swalStatistics(sortedPlayers) {
   let statisticsHTML = `
     <table style="width: 100%">
@@ -111,7 +118,9 @@ function swalStatistics(sortedPlayers) {
   createTableFromData(sortedPlayers);
 }
 
-// function that will create table body from input data
+/**
+ * Creates the table
+ **/
 function createTableFromData(data) {
   let tableBody = document.getElementById("table-data");
   for (let player of data) {

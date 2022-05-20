@@ -7,21 +7,24 @@ let puzzleWord = randomize(gameWords);
 let playerId;
 console.log(puzzleWord);
 
-// This function will return one word from API database (open source)
-
+/**
+ *Returns one random word from five_char_words.txt
+ **/
 function randomize(words) {
   let shuffledWords = words[Math.floor(Math.random() * words.length)];
   return Array.from(shuffledWords.toUpperCase());
 }
 
-//Function that will change the color of tile in the game board depending on the user input and puzzle word
-
+/**
+ *Changes the colour of tile in the game board depending on the user input and puzzle word
+ **/
 function tileColor(tile, color) {
   tile.classList.add(`${color}-button`);
 }
 
-// Function that will change background color of button to red, if the letter does not appear in the word from the puzzle
-
+/**
+ *Changes background color of button to red, if the letter does not appear in the word from the puzzle
+ **/
 function buttonToRed(wrongLetter, correctLetter, puzzleArray) {
   let letterElement = document.getElementById(
     `letter-${wrongLetter.toLowerCase()}`
@@ -47,8 +50,9 @@ function checkForCorrectLetter(correctAnswer, userAnswer) {
   }
 }
 
-// Clear Board
-
+/**
+ *Clears board and remove applied colours due to user actions
+ **/
 function clearBoard() {
   let puzzleRows = document.querySelectorAll(".puzzle-area-row-flex");
   for (let tiles of puzzleRows) {
@@ -65,15 +69,11 @@ function clearBoard() {
   }
 }
 
-// Win condition check
-
-function winConditionCheck(correctAnswer) {
-  let firstLetter = correctAnswer[0];
-  let fourLetters = correctAnswer.slice(1, 5);
-  let fourLettersJoin = fourLetters.join("");
-  let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
-  let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
-  swalConfirm(`That is correct ! The puzzle word was ${answerToDisplay}`);
+/**
+ *Checks if the player guessed the right word
+ **/
+function winConditionCheck() {
+  swalConfirm("That is correct !");
   console.log(playerId);
   player = getPlayerById(playerId);
   console.log(player);
@@ -86,8 +86,9 @@ function winConditionCheck(correctAnswer) {
   clearBoard();
 }
 
-// Game over condition check
-
+/**
+ *Game over condition check
+ **/
 function gameOverConditionCheck(userAnswer, correctAnswer) {
   if (userAnswer.toString() !== correctAnswer.toString()) {
     let firstLetter = correctAnswer[0];
@@ -109,8 +110,9 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
   }
 }
 
-// Function that checks letter placement
-
+/**
+ * Checks letter placement
+ **/
 function checkForLetterPlacement(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
   for (i = 0; i < userAnswer.length; i++) {
@@ -124,15 +126,16 @@ function checkForLetterPlacement(correctAnswer, userAnswer) {
   }
 }
 
-// Function that will check the answer
-
+/**
+ *Checks the player answer
+ **/
 function checkAnswer(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
   if (correctAnswer.toString() === userAnswer.toString()) {
     for (let tile of activeRow.children) {
       tileColor(tile, "green");
     }
-    winConditionCheck(puzzleWord);
+    winConditionCheck();
     rowCounter = 0;
   } else {
     checkForCorrectLetter(correctAnswer, userWord);
@@ -140,16 +143,18 @@ function checkAnswer(correctAnswer, userAnswer) {
   }
 }
 
-// Function that will insert value to the row
-
+/**
+ *Inserts value (letter) to the row
+ **/
 function insertValue(rowNumber, index, value) {
   let activeRow = document.querySelector(`#row-${rowNumber}`);
   let letterInsert = activeRow.children[index];
   letterInsert.innerHTML = value;
 }
 
-// Function that validate the correct number of letters
-
+/**
+ *Validates the correct number of letters
+ **/
 function pushLetterValidation(letterButton, userWord) {
   if (userWord.length < 5) {
     let letter = letterButton.innerHTML;
@@ -161,8 +166,9 @@ function pushLetterValidation(letterButton, userWord) {
   }
 }
 
-// Function that submit word to row
-
+/**
+ *Submit word to row
+ **/
 function submitAnswer(rowNumber, wordArray) {
   // Currently active row on the board
   let activeRow = document.querySelector(`#row-${rowNumber}`);
@@ -173,8 +179,9 @@ function submitAnswer(rowNumber, wordArray) {
   }
 }
 
-// Function that will check if the word is in API database
-
+/**
+ *Validates if the guessed word is in database
+ **/
 function isValidWord(word) {
   let wordToCheck = word.join("").toLowerCase();
   if (gameWords.includes(wordToCheck)) {
@@ -184,8 +191,9 @@ function isValidWord(word) {
   }
 }
 
-// Function that will get the enter and delete buttons elements and add event listeners
-
+/**
+ * Initiates action buttons
+ **/
 function initiateButtonsActions() {
   let letterButtons = document.querySelectorAll(".letter-button");
   for (let letterButton of letterButtons) {
@@ -229,8 +237,9 @@ function initiateButtonsActions() {
   });
 }
 
-// Function that will display SweetAlert, capture user input and push it to local storage
-
+/**
+ * Displays SweetAlert2, capture user input and push it to local storage
+ **/
 function swalInput(id) {
   Swal.fire({
     title: "Choose your username",
@@ -247,9 +256,11 @@ function swalInput(id) {
     preConfirm: () => {
       let input = Swal.getPopup().querySelector("#username").value;
       if (!input) {
+        // Part of SweetAlert2 functionality
         Swal.showValidationMessage(`Please enter your username`);
       }
       if (input.length > 12) {
+        // Part of SweetAlert2 functionality
         Swal.showValidationMessage(`Max 12 characters`);
       }
       return input;
@@ -263,27 +274,24 @@ function swalInput(id) {
   });
 }
 
-//  Wait for the DOM finish loading
-// Get the rules and statistics element, add event listeners,  SweetAlert modals
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Rules
-
+/**
+ * Gets the rules and statistics element and add event listeners
+ **/
+function initiateRulesAndStatistics() {
   let rulesInfo = document.getElementById("rules");
   rulesInfo.addEventListener("click", function () {
     rulesSwalAlert();
   });
-  // Stats
   let statistics = document.getElementById("statistics");
   statistics.addEventListener("click", function () {
     swalStatistics(getTopFivePlayers());
   });
-});
+}
 
-//  Wait for the DOM finish loading , start the game
-
-document.addEventListener("DOMContentLoaded", function () {
-  // Initiate local storage when one does not exist
+/**
+ * Start the game
+ **/
+function initiateGame() {
   if (!localStorage.Players) {
     localStorage.Players = JSON.stringify([]);
   }
@@ -291,10 +299,16 @@ document.addEventListener("DOMContentLoaded", function () {
   playerId = newPlayer.id;
   swalInput(newPlayer.id);
   initiateButtonsActions();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+  initiateRulesAndStatistics();
+  initiateGame();
 });
 
-// Create new Player
-
+/**
+ * Creates new player
+ **/
 function createNewPlayer() {
   players = getPlayers();
   let lastId = 0;
@@ -311,22 +325,25 @@ function createNewPlayer() {
   return newPlayer;
 }
 
-// Get players
-
+/**
+ * Gets players from local storage
+ **/
 function getPlayers() {
   return JSON.parse(localStorage.Players);
 }
 
-// Save players
-
+/**
+ * Saves player
+ **/
 function savePlayer(newPlayer) {
   players = getPlayers();
   players.push(newPlayer);
   savePlayers(players);
 }
 
-// Update player
-
+/**
+ * Updates players
+ **/
 function updatePlayer(updatedPlayer) {
   players = players.map((player) =>
     player.id !== updatedPlayer.id ? player : updatedPlayer
@@ -334,14 +351,16 @@ function updatePlayer(updatedPlayer) {
   savePlayers(players);
 }
 
-// Save player
-
+/**
+ * Saves player to local storage
+ **/
 function savePlayers(players) {
   localStorage.Players = JSON.stringify(players);
 }
 
-// Get player by Id
-
+/**
+ * Returns player by Id
+ **/
 function getPlayerById(id) {
   players = getPlayers();
   for (let player of players) {
@@ -351,8 +370,9 @@ function getPlayerById(id) {
   }
 }
 
-// Function that will filter out invalid entries
-
+/**
+ * Filters out invalid entries
+ **/
 function getLeaderBoardPlayers() {
   let dataToSort = getPlayers();
   let leaderBoardPlayers = [];
@@ -370,8 +390,9 @@ function getLeaderBoardPlayers() {
 
 getLeaderBoardPlayers();
 
-// Function that will sort players
-
+/**
+ * Sorts Players
+ **/
 function sortPlayers(dataToSort) {
   let dataSorted = dataToSort.sort(
     (a, b) => a.name - b.name || b.score - a.score || a.gameTime - b.gameTime
@@ -379,8 +400,9 @@ function sortPlayers(dataToSort) {
   return dataSorted;
 }
 
-// Return top five players
-
+/**
+ * Returns top five players
+ **/
 function getTopFivePlayers() {
   let sortedPlayers = sortPlayers(getLeaderBoardPlayers());
   return sortedPlayers.slice(0, 5);
