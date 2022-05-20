@@ -29,6 +29,10 @@ body {
   text-align: right;
 }
 
+a {
+  text-decoration: none;
+}
+
 /* Navbar */
 
 .navbar-container-flex {
@@ -44,10 +48,22 @@ body {
 ul li {
   display: inline-block;
   margin-right: 10px;
+  font-size: 24px;
+}
+
+#menu-right i:hover {
+  color: orange;
+  transition: 1s;
 }
 
 #rules {
   margin-left: 10px;
+  font-size: 24px;
+}
+
+#rules i:hover {
+  color: #9de0f6;
+  transition: 1s;
 }
 
 #logo {
@@ -177,7 +193,36 @@ footer {
   border-top: #111111 2px solid;
   margin-top: auto;
   text-align: center;
-  font-size: 16px;
+}
+
+/* Footer links */
+
+#footer-links {
+  font-size: 0px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#footer-links i {
+  font-size: 22px;
+  margin-left: 15px;
+  color: #111111;
+}
+
+#footer-links i:hover {
+  transition: 0.8s;
+}
+
+#footer-links .fa-facebook:hover {
+  color: #1877f2;
+}
+
+#footer-links .fa-linkedin:hover {
+  color: #0a66c2;
+}
+
+#footer-links .fa-github:hover {
+  color: #8400e3;
 }
 
 /* Media queries */
