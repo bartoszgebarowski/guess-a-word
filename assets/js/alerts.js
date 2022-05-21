@@ -13,9 +13,11 @@ function rulesSwalAlert() {
   </div>
 </div>
 <div class="margin-top-10px">
-  <p class="text-align-left margin-top-10px">1. The objective of the game is to guess the correct word in 6 tries.</p>
-  <p class="text-align-left margin-top-10px">2. Each guess must be a valid five-letter english word.</p>
-  <p class="text-align-left margin-top-10px">3. After each try, the letters will be coloured accordingly on the puzzle board or the keyboard panel.</p>
+  <ul class="text-align-left">
+    <li>1. The objective of the game is to guess the correct word in 6 tries.</li>
+    <li>2. Each guess must be a valid five-letter english word.</li>
+    <li>3. After each try, the letters will be coloured accordingly on the puzzle board or the keyboard panel.</li>
+  </ul>
   <p class="margin-top-10px">Considering the example above:</p>
   <p class="text-align-left margin-top-10px">If the letter is in the puzzle word and is on its place, the tile will be coloured on green (Tile with letter R).</p>
   <p class="text-align-left margin-top-10px">If the letter is in the puzzle word but not on its place, the tile will coloured on yellow (Tile with letter W).</p>
@@ -34,12 +36,12 @@ function rulesSwalAlert() {
 
   Swal.fire({
     customClass: {
-      htmlContainer: "swal-custom-html-container-height",
+      htmlContainer: "swal-custom-html-container-rules",
     },
     icon: "info",
     width: "1000px",
     html: rulesHTML,
-    confirmButtonColor: "#3085d6",
+    confirmButtonColor: "#2166A6",
     confirmButtonText: "Ok, got it!",
     allowOutsideClick: false,
     allowEscapeKey: false,
@@ -55,7 +57,7 @@ function swalError(text) {
     title: "Error",
     text: `${text}`,
     allowOutsideClick: false,
-    confirmButtonColor: "#FF0000",
+    confirmButtonColor: "#DC3741",
     allowEscapeKey: false,
   });
 }
@@ -69,7 +71,7 @@ function swalConfirm(text) {
     title: "Good Job",
     text: `${text}`,
     allowOutsideClick: false,
-    confirmButtonColor: "#1DB954",
+    confirmButtonColor: "#006100",
     allowEscapeKey: false,
   });
 }
@@ -83,7 +85,7 @@ function swalWarning(text) {
     title: "Game Over",
     text: `${text}`,
     allowOutsideClick: false,
-    confirmButtonColor: "#facea8",
+    confirmButtonColor: "#7066e0",
     confirmButtonText: "Try again",
     allowEscapeKey: false,
   });
@@ -110,7 +112,7 @@ function swalStatistics(sortedPlayers) {
     title: "Statistics",
     html: statisticsHTML,
     allowOutsideClick: false,
-    confirmButtonColor: "#1DB954",
+    confirmButtonColor: "#008A00",
     confirmButtonText: "OK",
     allowEscapeKey: false,
   });

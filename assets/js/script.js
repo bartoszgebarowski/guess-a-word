@@ -73,7 +73,7 @@ function clearBoard() {
  *Checks if the player guessed the right word
  **/
 function winConditionCheck() {
-  swalConfirm("That is correct !");
+  swalConfirm("That is correct! +1 point");
   console.log(playerId);
   player = getPlayerById(playerId);
   console.log(player);
@@ -242,14 +242,13 @@ function initiateButtonsActions() {
  **/
 function swalInput(id) {
   Swal.fire({
-    title: "Choose your username",
-    html: `<input type="text" id="username" class="swal-custom-input" placeholder="Username">`,
+    html: `<label for="username">Choose your username</label>
+    <input type="text" id="username" name="username" class="swal-custom-input" placeholder="Username">`,
     customClass: {
-      htmlContainer: "swal-custom-html-container",
       input: "swal-custom-input",
     },
     confirmButtonText: "I'm, ready",
-    confirmButtonColor: "#1DB954",
+    confirmButtonColor: "#008A00",
     focusConfirm: false,
     allowOutsideClick: false,
     allowEscapeKey: false,

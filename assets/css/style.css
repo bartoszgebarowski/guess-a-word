@@ -45,14 +45,15 @@ a {
   font-size: 16px;
 }
 
-ul li {
+#menu-right {
   display: inline-block;
+  list-style: none;
   margin-right: 10px;
   font-size: 24px;
 }
 
 #menu-right i:hover {
-  color: orange;
+  color: #ffa500;
   transition: 1s;
 }
 
@@ -151,40 +152,46 @@ ul li {
 
 .red-button,
 .red-background {
-  background-color: red;
+  background-color: #ff0000;
 }
 
 .green-button,
 .green-background {
-  background-color: green;
+  background-color: #008000;
+  color: #111111;
 }
 
 .yellow-button,
 .yellow-background {
-  background-color: yellow;
-}
-
-.grey-background {
-  background-color: gray;
+  background-color: #ffff00;
 }
 
 .letter-button-example {
-  width: 60px;
-  height: 60px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
   font-size: 30px;
   border: #111111 1px solid;
+  color: #111111;
 }
 
-.swal-custom-html-container-height {
+.swal-custom-html-container-rules {
   height: 60vh;
+  color: #111111;
+}
+
+label[for="username"] {
+  font-size: 36px;
 }
 
 .swal-custom-input {
   margin: 0;
+  margin-top: 20px;
   width: 80%;
   height: 40px;
   font-size: 16px;
   outline: none;
+  padding: 10px;
 }
 
 /* Footer */
