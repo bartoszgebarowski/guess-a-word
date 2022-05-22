@@ -61,7 +61,7 @@ Allows a user to easily identify the page if they have multiple open tabs
 
 ### Logo 
 
-Its purpose is to serve marketing purposes and differentiation between localized versions of the application in the future
+* Its purpose is to serve marketing purposes and differentiation between localized versions of the application in the future
 
 ### Rules
 
@@ -93,7 +93,7 @@ Its purpose is to serve marketing purposes and differentiation between localized
     - If the letter is in the right place and in the word, tile will change its colour to green
     - If the letter is not in the right place but in the word, tile will change its colour to yellow
   - A validation system was implemented:
-    - It is not possible to confirm empty answer or less than five characters
+    - It is not possible to confirm an empty answer or less than five characters
     - It is not possible to send more than five characters
     - The user input must be a valid English word
 
@@ -103,11 +103,11 @@ Its purpose is to serve marketing purposes and differentiation between localized
   - It simulates a real keyboard with a standard QWERTY layout
   - Buttons will change colour to red to clue users that the letters that they have guessed are not in the word
 - Backspace button that allows user to remove one letter from a potential answer
-- Enter button, for confirming the answer
+- Enter button, to confirm the answer
 
 ### Footer
 
-- It serves as quick access to various points of interests and informs that the website was created for educational purposes only
+- It serves as quick access to various points of interest and informs that the website was created for educational purposes only
 - A theme icons from the 'Font Awesome' are present as an additional form of indication and visual stimulation
 - The hover effect for each icon informs the user that it is an interactive element. It is also related to a specific third-party service
 
@@ -120,7 +120,7 @@ Its purpose is to serve marketing purposes and differentiation between localized
 - Huge words database (over 9000 words)
 - Each puzzle word is chosen randomly to ensure the replayability value
 - Score and time tracking system
-- Easy to port to different languages
+- Relatively easy to port to different languages
 
 ## Features left to implement
 
@@ -128,7 +128,7 @@ Its purpose is to serve marketing purposes and differentiation between localized
 - Different difficulty settings
 - Theme selector to offer a choice of graphical style
 - Better statistics with real database
-- Cookie policy and GDPR statement to comply with legal condition
+- Cookie policy and GDPR statement to comply with legal conditions
 
 [Back to Table of contents](#table-of-contests)
 
@@ -238,6 +238,8 @@ Wave Evaluation Tool was used throughout the development process and for final t
 
 ### Lighthouse testing
 
+![Lightouse screenshot](docs/testing/lighthouse.png)
+
 [Back to Table of contents](#table-of-contests)
 
 ## Functional testing
@@ -342,7 +344,7 @@ _Scenario 3: User exhausted all tries_
 
 1. Navigate to [Woord page](https://bartoszgebarowski.github.io/guess-a-word/)
 2. Click the letter buttons to create a word, and then press enter to confirm your answer
-3. Repeat step 2, six times, to exhaust all tries
+3. Repeat step 2, six times to exhaust all tries
 
 Expected:
 
