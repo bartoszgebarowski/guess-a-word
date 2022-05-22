@@ -109,6 +109,9 @@ function swalStatistics(sortedPlayers) {
   </div>
   `;
   Swal.fire({
+    customClass: {
+      htmlContainer: "swal-custom-html-container",
+    },
     title: "Statistics",
     html: statisticsHTML,
     allowOutsideClick: false,

@@ -2,10 +2,8 @@
 
 let rowCounter = 1;
 let userWord = [];
-console.log(gameWords);
 let puzzleWord = randomize(gameWords);
 let playerId;
-console.log(puzzleWord);
 
 /**
  *Returns one random word from five_char_words.txt
@@ -74,15 +72,12 @@ function clearBoard() {
  **/
 function winConditionCheck() {
   swalConfirm("That is correct! +1 point");
-  console.log(playerId);
   player = getPlayerById(playerId);
-  console.log(player);
   player.score++;
   player.endTime = new Date().getTime();
   player.gameTime = (player.endTime - player.startTime) / 1000;
   updatePlayer(player);
   puzzleWord = randomize(gameWords);
-  console.log(puzzleWord);
   clearBoard();
 }
 
@@ -97,7 +92,6 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
     player = getPlayerById(playerId);
-    console.log(player);
     player.endTime = new Date().getTime();
     player.gameTime = (player.endTime - player.startTime) / 1000;
     updatePlayer(player);
@@ -105,7 +99,6 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
       `You have used all of your tries. The correct answer was ${answerToDisplay}`
     );
     puzzleWord = randomize(gameWords);
-    console.log(puzzleWord);
     clearBoard();
   }
 }
@@ -198,7 +191,6 @@ function initiateButtonsActions() {
   let letterButtons = document.querySelectorAll(".letter-button");
   for (let letterButton of letterButtons) {
     letterButton.addEventListener("click", function () {
-      console.log(`${letterButton.textContent} pressed`);
       pushLetterValidation(letterButton, userWord);
     });
   }
@@ -328,6 +320,9 @@ function createNewPlayer() {
  * Gets players from local storage
  **/
 function getPlayers() {
+  if (!localStorage.Players) {
+    localStorage.Players = JSON.stringify([]);
+  }
   return JSON.parse(localStorage.Players);
 }
 

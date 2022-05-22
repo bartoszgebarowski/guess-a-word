@@ -180,6 +180,10 @@ a {
   color: #111111;
 }
 
+.swal-custom-html-container {
+  width: 90%;
+}
+
 label[for="username"] {
   font-size: 36px;
 }
