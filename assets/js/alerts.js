@@ -36,7 +36,8 @@ function rulesSwalAlert() {
 
   Swal.fire({
     customClass: {
-      htmlContainer: "swal-custom-html-container-rules",
+      title: "color-black",
+      htmlContainer: "swal-custom-html-container-rules color-black",
     },
     icon: "info",
     width: "1000px",
@@ -53,6 +54,10 @@ function rulesSwalAlert() {
  **/
 function swalError(text) {
   Swal.fire({
+    customClass: {
+      title: "color-black",
+      htmlContainer: "color-black",
+    },
     icon: "error",
     title: "Error",
     text: `${text}`,
@@ -67,6 +72,10 @@ function swalError(text) {
  **/
 function swalConfirm(text) {
   Swal.fire({
+    customClass: {
+      title: "color-black",
+      htmlContainer: "color-black",
+    },
     icon: "success",
     title: "Good Job",
     text: `${text}`,
@@ -81,6 +90,10 @@ function swalConfirm(text) {
  **/
 function swalWarning(text) {
   Swal.fire({
+    customClass: {
+      title: "color-black",
+      htmlContainer: "color-black",
+    },
     icon: "warning",
     title: "Game Over",
     text: `${text}`,
@@ -110,7 +123,8 @@ function swalStatistics(sortedPlayers) {
   `;
   Swal.fire({
     customClass: {
-      htmlContainer: "swal-custom-html-container",
+      title: "color-black",
+      htmlContainer: "swal-custom-html-container color-black",
     },
     title: "Statistics",
     html: statisticsHTML,

@@ -238,6 +238,7 @@ function swalInput(id) {
     <input type="text" id="username" name="username" class="swal-custom-input" placeholder="Username">`,
     customClass: {
       input: "swal-custom-input",
+      htmlContainer: "color-black",
     },
     confirmButtonText: "I'm, ready",
     confirmButtonColor: "#008A00",

@@ -181,7 +181,12 @@ a {
 }
 
 .swal-custom-html-container {
-  width: 90%;
+  width: 92%;
+  color: #111111;
+}
+
+.color-black {
+  color: #111111 !important;
 }
 
 label[for="username"] {
@@ -222,6 +227,10 @@ footer {
 
 #footer-links i:hover {
   transition: 0.8s;
+}
+
+footer p {
+  font-size: 14px;
 }
 
 #footer-links .fa-facebook:hover {
