@@ -7,7 +7,7 @@ This project was heavily inspired by the previously mentioned Wordle and was bui
 
 ![Am i responsive screenshot](docs/readme_images/am-i-responsive-img.png)
 
-## Table of contests
+## Table of contents
 
 1. [Site overview](#site-overview)
 1. [Features](#features)
@@ -56,7 +56,7 @@ Allows a user to easily identify the page if they have multiple open tabs
 
 ### Responsive navigation bar
 
-- It contains the logo and buttons that will bring up the rules and statistics popups respectively
+- It contains the logo and buttons that will bring up the rules and statistics popups, respectively
   - The display of the navigation bar changes depending on screen size
 
 ### Logo 
@@ -78,20 +78,20 @@ Allows a user to easily identify the page if they have multiple open tabs
 
 ### Username creator
 
-- Users have to create username in order to play the game
+- Users have to create a username in order to play the game
   - It is connected to the point and time tracking system
   - A validation system was implemented: blank inputs or more than 12 characters are not accepted
   - SweetAlert2 was used to present the input window
 
 ### Puzzle area
 
-- Main area of the application
+- The main area of the application
   - It contains six rows, with five tiles each
   - Each tile can contain only one letter
   - Each row symbolizes one trying to guess the right word
   - Each tile changes its colour after confirming the answer
-    - If the letter is in the right place and in the word, tile will change its colour to green
-    - If the letter is not in the right place but in the word, tile will change its colour to yellow
+    - If the letter is in the right place, tile will change its colour to green
+    - If the letter is not in the right place, tile will change its colour to yellow
   - A validation system was implemented:
     - It is not possible to confirm an empty answer or less than five characters
     - It is not possible to send more than five characters
@@ -99,7 +99,7 @@ Allows a user to easily identify the page if they have multiple open tabs
 
 ### Keyboard panel
 
-- Its main purpose is to allow the user to interact with the game board
+- Its primary purpose is to allow the user to interact with the game board
   - It simulates a real keyboard with a standard QWERTY layout
   - Buttons will change colour to red to clue users that the letters that they have guessed are not in the word
 - Backspace button that allows user to remove one letter from a potential answer
@@ -111,7 +111,7 @@ Allows a user to easily identify the page if they have multiple open tabs
 - A theme icons from the 'Font Awesome' are present as an additional form of indication and visual stimulation
 - The hover effect for each icon informs the user that it is an interactive element. It is also related to a specific third-party service
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Existing features
 
@@ -127,10 +127,10 @@ Allows a user to easily identify the page if they have multiple open tabs
 - Fully-fledged account system
 - Different difficulty settings
 - Theme selector to offer a choice of graphical style
-- Better statistics with real database
+- Better statistics with a real database
 - Cookie policy and GDPR statement to comply with legal conditions
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Design
 
@@ -154,7 +154,7 @@ https://contrast-grid.eightshapes.com/
 
 ![Contrast grid screenshot](docs/readme_images/colour-grid.png)
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ### Wireframes
 
@@ -197,7 +197,7 @@ https://contrast-grid.eightshapes.com/
 - Contrast grid https://contrast-grid.eightshapes.com/
   - Colour palette compliance with WCAG 2.0 standard
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Testing
 
@@ -240,7 +240,7 @@ Wave Evaluation Tool was used throughout the development process and for final t
 
 ![Lightouse screenshot](docs/testing/lighthouse.png)
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Functional testing
 
@@ -303,7 +303,7 @@ Result:
 
 The alert is behaving as expected
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ### Game testing
 
@@ -397,7 +397,7 @@ Result:
 
 The application is behaving as expected
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ### Alerts testing
 
@@ -428,7 +428,7 @@ Result:
 
 The alerts are behaving as expected
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ### Footer links
 
@@ -440,7 +440,7 @@ Manual testing was performed to ensure that each button leads to the external we
 | Github          | https://github.com/bartoszgebarowski/guess-a-word |
 | Linkedin        | https://www.linkedin.com/in/bartoszgebarowski/    |
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ### Validator testing
 
@@ -456,7 +456,7 @@ Manual testing was performed to ensure that each button leads to the external we
 
 Code passed through JSHint with no significant issues.
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Deployment
 
@@ -500,7 +500,7 @@ https://bartoszgebarowski.github.io/guess-a-word/
 - Choose the IDE with git bash support
 - Use command `git clone copied-url` into bash terminal
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)
 
 ## Credits
 
@@ -516,4 +516,4 @@ Logo
   * https://www.nicepng.com/maxp/u2w7o0a9y3o0i1r5/
   * https://www.subpng.com/png-1ohhrp/
 
-[Back to Table of contents](#table-of-contests)
+[Back to Table of contents](#table-of-contents)

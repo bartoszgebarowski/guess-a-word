@@ -19,9 +19,9 @@ function rulesSwalAlert() {
     <li>3. After each try, the letters will be coloured accordingly on the puzzle board or the keyboard panel.</li>
   </ul>
   <p class="margin-top-10px">Considering the example above:</p>
-  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word and is on its place, the tile will be coloured on green (Tile with letter R).</p>
-  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word but not on its place, the tile will coloured on yellow (Tile with letter W).</p>
-  <p class="text-align-left margin-top-10px">If the letter is not in the puzzle word, the corresponding buttons on the keyboard panel will be coloured on red.</p>
+  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word and is in its place, the tile will be coloured green (Tile with letter R).</p>
+  <p class="text-align-left margin-top-10px">If the letter is in the puzzle word but not in its place, the tile will be coloured yellow (Tile with letter W).</p>
+  <p class="text-align-left margin-top-10px">If the letter is not in the puzzle word, the corresponding buttons on the keyboard panel will be coloured red.</p>
   <div class="margin-top-10px">
     <span class="letter-button-example red-background">O</span>
     <span class="letter-button-example red-background">L</span>
