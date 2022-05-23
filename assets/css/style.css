@@ -33,6 +33,10 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-size: 28px;
+}
+
 /* Navbar */
 
 .navbar-container-flex {
@@ -201,6 +205,31 @@ label[for="username"] {
   font-size: 16px;
   outline: none;
   padding: 10px;
+}
+
+/* Error 404 */
+
+#error-404-container-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 8%;
+  margin-left: 40px;
+  margin-right: 40px;
+  text-align: center;
+  color: #111111;
+}
+
+#error-404-container-flex img {
+  margin: 40px 0px;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+#error-404-container-flex p {
+  font-size: 24px;
 }
 
 /* Footer */
