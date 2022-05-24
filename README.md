@@ -20,11 +20,21 @@ This project was heavily inspired by the previously mentioned Wordle and was bui
     * [Puzzle area](#puzzle-area)
     * [Keyboard panel](#keyboard-panel)
     * [Footer](#footer)
+    * [Error 404 page](#error-404-page)
 1. [Existing features](#existing-features)
 1. [Features left to implement](#features-left-to-implement)
 1. [Design](#design)
     * [Colour scheme](#colour-scheme)
     * [Wireframes](#wireframes)
+      * [Main page: desktop view](#main-page-desktop-view)
+      * [Main pagoe: mobile view](#main-page-mobile-view)
+      * [Error 404: desktop view](#error-404-page-desktop-view)
+      * [Error 404: mobile view](#error-404-page-mobile-view)
+      * [Rules alert](#rules-alert)
+      * [Statistics alert](#statistics-alert)
+      * [Confirmation alert](#confirmation-alert)
+      * [Error alert](#error-alert)
+      * [Warning alert](#warning-alert)
 1. [Technologies and tools](#technologies-and-tools)
 1. [Testing](#testing)
     * [Responsiveness](#responsiveness)
@@ -35,10 +45,12 @@ This project was heavily inspired by the previously mentioned Wordle and was bui
     * [Game testing](#game-testing)
     * [Alerts testing](#alerts-testing)
     * [Footer links](#footer-links)
+    * [Error 404 page testing](#error-404-testing)
 1. [Validator testing](#validator-testing)
     * [W3C html validation service](#w3c-html-validation-service)
     * [W3C css validation service](#w3c-css-validation-service)
     * [JSHint](#jshint)
+1. [Observations](#observations)
 1. [Deployment](#deployment)
     * [Version control](#version-control)
     * [Deployment to Github pages](#deployment-to-github-pages)
@@ -111,6 +123,10 @@ Allows a user to easily identify the page if they have multiple open tabs
 - A theme icons from the 'Font Awesome' are present as an additional form of indication and visual stimulation
 - The hover effect for each icon informs the user that it is an interactive element. It is also related to a specific third-party service
 
+### Error 404 page
+
+* The 404 error page has been implemented to ensure that if the address is mistyped, the user can quickly return to the main page
+
 [Back to Table of contents](#table-of-contents)
 
 ## Existing features
@@ -146,7 +162,7 @@ Default white background was chosen to ensure that the user would not be distrac
 
 Connections to website subjects or connotations to specific brands were checked by performing meticulous web research. If such resources were not available, the Firefox colour selector tool was used instead.
 
-Certain compromises had to be made in colour choices while using SweetAlert2.
+Certain compromises had to be made in colour choices while using SweetAlert2. The default colour palette had to be manually altered to be in line with WCAG standard.
 
 To ensure compliance with WCAG 2.0 standard, the Contrast-Grid tool was used, which can be found at the link below:
 
@@ -157,14 +173,36 @@ https://contrast-grid.eightshapes.com/
 [Back to Table of contents](#table-of-contents)
 
 ### Wireframes
+#### Main page: desktop view
 
-  * Dekstop wireframe
+![Main page: desktop view](docs/readme_images/index-dekstop.png)
+#### Main page: mobile view
 
-  ![Desktop wireframe](docs/readme_images/desktop-wireframe.png)
+![Main page: mobile view](docs/readme_images/index-mobile.png)
+#### Error 404 page: desktop view
 
-  * Mobile wireframe
+![Error 404 page: desktop view](docs/readme_images/404-desktop.png)
 
-  ![Mobile wireframe](docs/readme_images/mobile-wireframe.png)
+#### Error 404 page: mobile view
+
+![Error 404 page: mobile view](docs/readme_images/404-mobile.png)
+#### Rules alert
+
+![Rules alert](docs/readme_images/rules-alert.png)
+#### Statistics alert 
+
+![Statistics alert](docs/readme_images/statistics-alert.png)
+#### Confirmation alert
+
+![Confirmation alert](docs/readme_images/confirmation-alert.png)
+#### Error alert 
+
+![Error alert](docs/readme_images/error-alert.png)
+#### Warning alert 
+
+![Warning alert](docs/readme_images/warning-alert.png)
+
+[Back to Table of contents](#table-of-contents)
 
 ## Technologies and tools
 
@@ -207,7 +245,7 @@ All pages were tested to support screen sizes from 320px and upwards.
 
 Steps to test:
 
-1. Open the browser and navigate to [Guess a word](https://bartoszgebarowski.github.io/guess-a-word/)
+1. Open the browser and navigate to [Woord page](https://bartoszgebarowski.github.io/guess-a-word/)
 1. Open the developer tools
 1. Set to dimensions to responsive
 1. Set the zoom to 50%
@@ -224,7 +262,7 @@ The website is behaving as expected
 - Website was also opened on the following mobile devices:
 
 Samsung Galaxy S7
-
+Iphone 13
 ### Accessibility
 
 Wave Evaluation Tool was used throughout the development process and for final testing. The following tests were conducted:
@@ -234,7 +272,9 @@ Wave Evaluation Tool was used throughout the development process and for final t
 - Contrast errors test
 - Aria labels implementation test
 - Alt attribute implementation test
-- SweetAlert2 popup boxes tests, where certain compromises had to be made
+- SweetAlert2 popup boxes tests
+
+Due to how the SweetAlert2 library is constructed, certain compromises had to be made regarding the structure and styling of alerts. All manual changes were made by prioritizing accessibility rather than visual expression and consistency.
 
 ### Lighthouse testing
 
@@ -440,6 +480,15 @@ Manual testing was performed to ensure that each button leads to the external we
 | Github          | https://github.com/bartoszgebarowski/guess-a-word |
 | Linkedin        | https://www.linkedin.com/in/bartoszgebarowski/    |
 
+
+#### Error 404 testing 
+
+The wrong address was typed into the browser to ensure that page that handles that error is functioning properly 
+
+Steps to test: 
+1. Open the browser and navigate to [Woord page](https://bartoszgebarowski.github.io/guess-a-word/)
+2. Type the wrong address, for example: https://bartoszgebarowski.github.io/guess-a-word/abc.html
+
 [Back to Table of contents](#table-of-contents)
 
 ### Validator testing
@@ -457,6 +506,12 @@ Manual testing was performed to ensure that each button leads to the external we
 Code passed through JSHint with no significant issues.
 
 [Back to Table of contents](#table-of-contents)
+
+## Observations
+
+1. The word validation was constructed during the development process by sending XMLHttpRequest to API. Words were considered valid English words only if the API responded with status 200. However, testing showed that some words were missing.
+That is why the validation of the word is based now on an internal database, pulled out directly from API.
+1. SweetAlert2 library, despite being visually attractive, required manual tinkering to ensure that it will fulfil its purpose in the application. Styling and structure had to be altered, and default classes had to be overwritten to suit application purposes and ensure maximum compliance with WCAG 2.0 standard.
 
 ## Deployment
 
@@ -504,7 +559,7 @@ https://bartoszgebarowski.github.io/guess-a-word/
 
 ## Credits
 
-### Honorable mentions
+### Honourable mentions
 
 - Gurjot Singh - Code Institute Mentor who supervised the development process and assisted me through the journey with Javascript
 - Tobiasz Chodarewicz - programming wizard whose guidance and patiently explaining complicated problems allowed me to progress through this project consistently
@@ -515,5 +570,7 @@ https://bartoszgebarowski.github.io/guess-a-word/
 Logo
   * https://www.nicepng.com/maxp/u2w7o0a9y3o0i1r5/
   * https://www.subpng.com/png-1ohhrp/
+Error 404 logo 
+  * https://www.clipartmax.com/middle/m2i8H7i8b1K9K9A0_cartoon-confuse-eye-mad-funny-confusion-pr-karikat%C3%BCr-g%C3%B6z-png/
 
 [Back to Table of contents](#table-of-contents)
