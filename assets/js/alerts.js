@@ -1,8 +1,4 @@
-/**
- * Shows the rule of the game, and determines the properties of SweetAlert2 modal
- **/
-function rulesSwalAlert() {
-  let rulesHTML = `
+const rulesHTML = `
 <div class="puzzle-area">
   <div class="puzzle-area-row-flex">
     <div class="tile yellow-background">W</div>
@@ -34,6 +30,24 @@ function rulesSwalAlert() {
 </div>
 `;
 
+const statisticsHTML = `
+<table style="width: 85%">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Score</th>
+      <th>Time</th>
+    </tr>
+  </thead>
+  <tbody id="table-data"></tbody>
+</table>
+</div>
+`;
+
+/**
+ * Shows the rule of the game, and determines the properties of SweetAlert2 modal
+ **/
+function rulesSwalAlert() {
   Swal.fire({
     customClass: {
       title: "color-black",
@@ -108,19 +122,6 @@ function swalWarning(text) {
  * Determines the properties of SweetAlert2 statistics
  **/
 function swalStatistics(sortedPlayers) {
-  let statisticsHTML = `
-    <table style="width: 100%">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Score</th>
-          <th>Time</th>
-        </tr>
-      </thead>
-      <tbody id="table-data"></tbody>
-    </table>
-  </div>
-  `;
   Swal.fire({
     customClass: {
       title: "color-black",
@@ -143,12 +144,12 @@ function swalStatistics(sortedPlayers) {
 function createTableFromData(data) {
   let tableBody = document.getElementById("table-data");
   for (let player of data) {
-    tr = document.createElement("tr");
-    tdName = document.createElement("td");
+    let tr = document.createElement("tr");
+    let tdName = document.createElement("td");
     tdName.innerHTML = player.name;
-    tdScore = document.createElement("td");
+    let tdScore = document.createElement("td");
     tdScore.innerHTML = player.score;
-    tdTime = document.createElement("td");
+    let tdTime = document.createElement("td");
     tdTime.innerHTML = player.gameTime;
     tr.appendChild(tdName);
     tr.appendChild(tdScore);

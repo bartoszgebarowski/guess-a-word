@@ -35,7 +35,7 @@ function buttonToRed(wrongLetter, correctLetter, puzzleArray) {
 // Function that checks if letter is correct
 function checkForCorrectLetter(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
-  for (i = 0; i < userAnswer.length; i++) {
+  for (let i = 0; i < userAnswer.length; i++) {
     let guessedLetter = userAnswer[i];
     let correctLetter = correctAnswer[i];
     if (guessedLetter === correctLetter) {
@@ -72,7 +72,7 @@ function clearBoard() {
  **/
 function winConditionCheck() {
   swalConfirm("That is correct! +1 point");
-  player = getPlayerById(playerId);
+  let player = getPlayerById(playerId);
   player.score++;
   player.endTime = new Date().getTime();
   player.gameTime = (player.endTime - player.startTime) / 1000;
@@ -91,7 +91,7 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
     let fourLettersJoin = fourLetters.join("");
     let fourLettersJoinLowerCase = fourLettersJoin.toLowerCase();
     let answerToDisplay = firstLetter + fourLettersJoinLowerCase;
-    player = getPlayerById(playerId);
+    let player = getPlayerById(playerId);
     player.endTime = new Date().getTime();
     player.gameTime = (player.endTime - player.startTime) / 1000;
     updatePlayer(player);
@@ -108,7 +108,7 @@ function gameOverConditionCheck(userAnswer, correctAnswer) {
  **/
 function checkForLetterPlacement(correctAnswer, userAnswer) {
   let activeRow = document.querySelector(`#row-${rowCounter}`);
-  for (i = 0; i < userAnswer.length; i++) {
+  for (let i = 0; i < userAnswer.length; i++) {
     let guessedLetter = userAnswer[i];
     let letterIndex = correctAnswer.indexOf(guessedLetter);
     if (letterIndex !== -1) {
@@ -166,7 +166,7 @@ function submitAnswer(rowNumber, wordArray) {
   // Currently active row on the board
   let activeRow = document.querySelector(`#row-${rowNumber}`);
   // Add user word into the board
-  for (i = 0; i < activeRow.children.length; i++) {
+  for (let i = 0; i < activeRow.children.length; i++) {
     let letterInsert = activeRow.children[i];
     letterInsert.innerHTML = wordArray[i];
   }
@@ -258,6 +258,8 @@ function swalInput(id) {
       return input;
     },
   }).then((input) => {
+    let player;
+    let players;
     players = getPlayers();
     player = getPlayerById(id);
     player.name = input.value;
@@ -302,7 +304,7 @@ document.addEventListener("DOMContentLoaded", function () {
  * Creates new player
  **/
 function createNewPlayer() {
-  players = getPlayers();
+  let players = getPlayers();
   let lastId = 0;
   if (players.length) {
     lastId = players.at(-1).id;
@@ -331,7 +333,7 @@ function getPlayers() {
  * Saves player
  **/
 function savePlayer(newPlayer) {
-  players = getPlayers();
+  let players = getPlayers();
   players.push(newPlayer);
   savePlayers(players);
 }
@@ -340,6 +342,7 @@ function savePlayer(newPlayer) {
  * Updates players
  **/
 function updatePlayer(updatedPlayer) {
+  let players = getPlayers();
   players = players.map((player) =>
     player.id !== updatedPlayer.id ? player : updatedPlayer
   );
@@ -357,7 +360,7 @@ function savePlayers(players) {
  * Returns player by Id
  **/
 function getPlayerById(id) {
-  players = getPlayers();
+  let players = getPlayers();
   for (let player of players) {
     if (player.id == id) {
       return player;
@@ -371,7 +374,7 @@ function getPlayerById(id) {
 function getLeaderBoardPlayers() {
   let dataToSort = getPlayers();
   let leaderBoardPlayers = [];
-  for (i = 0; i < dataToSort.length; i++) {
+  for (let i = 0; i < dataToSort.length; i++) {
     if (
       dataToSort[i].name &&
       dataToSort[i].gameTime !== 0 &&
