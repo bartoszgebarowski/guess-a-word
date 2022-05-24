@@ -23,7 +23,7 @@ function tileColor(tile, color) {
 /**
  *Changes background color of button to red, if the letter does not appear in the word from the puzzle
  **/
-function buttonToRed(wrongLetter, correctLetter, puzzleArray) {
+function buttonToRed(wrongLetter, puzzleArray) {
   let letterElement = document.getElementById(
     `letter-${wrongLetter.toLowerCase()}`
   );
@@ -43,7 +43,7 @@ function checkForCorrectLetter(correctAnswer, userAnswer) {
       tileColor(activeRow.children[i], "green");
       correctAnswer[i] = 0;
     } else {
-      buttonToRed(guessedLetter, correctLetter, puzzleWord);
+      buttonToRed(guessedLetter, puzzleWord);
     }
   }
 }
