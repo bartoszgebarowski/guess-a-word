@@ -188,19 +188,19 @@ https://contrast-grid.eightshapes.com/
 ![Error 404 page: mobile view](docs/readme_images/404-mobile.png)
 #### Rules alert
 
-![Rules alert](docs/readme_images/rules-alert.png)
+![Rules alert screenshot](docs/readme_images/rules-alert.png)
 #### Statistics alert 
 
-![Statistics alert](docs/readme_images/statistics-alert.png)
+![Statistics alert screenshot](docs/readme_images/statistics-alert.png)
 #### Confirmation alert
 
-![Confirmation alert](docs/readme_images/confirmation-alert.png)
+![Confirmation alert screenshot](docs/readme_images/confirmation-alert.png)
 #### Error alert 
 
-![Error alert](docs/readme_images/error-alert.png)
+![Error alert screenshot](docs/readme_images/error-alert.png)
 #### Warning alert 
 
-![Warning alert](docs/readme_images/warning-alert.png)
+![Warning alert screenshot](docs/readme_images/warning-alert.png)
 
 [Back to Table of contents](#table-of-contents)
 
@@ -278,7 +278,7 @@ Due to how the SweetAlert2 library is constructed, certain compromises had to be
 
 ### Lighthouse testing
 
-![Lightouse screenshot](docs/testing/lighthouse.png)
+![Lightouse testing screenshot](docs/testing/lighthouse.png)
 
 [Back to Table of contents](#table-of-contents)
 
@@ -495,11 +495,13 @@ Steps to test:
 
 #### W3C HTML Validation Service
 
-![Contrast grid screenshot](docs/testing/html.png)
+![W3C HTML validation: index.html screenshot](docs/testing/html.png)
+
+![W3C HTML validation: 404.html screenshot](docs/testing/404.png)
 
 #### W3C CSS Validation Service
 
-![Contrast grid screenshot](docs/testing/css.png)
+![W3C CSS validation service screenshot](docs/testing/css.png)
 
 ### JSHint
 
@@ -512,6 +514,7 @@ Code passed through JSHint with no significant issues.
 1. The word validation was constructed during the development process by sending XMLHttpRequest to API. Words were considered valid English words only if the API responded with status 200. However, testing showed that some words were missing.
 That is why the validation of the word is based now on an internal database, pulled out directly from API.
 1. SweetAlert2 library, despite being visually attractive, required manual tinkering to ensure that it will fulfil its purpose in the application. Styling and structure had to be altered, and default classes had to be overwritten to suit application purposes and ensure maximum compliance with WCAG 2.0 standard.
+1. Building a live website failed during the development process due to Error 502. Rebuilding it again from the master branch, solved the issue.
 
 ## Deployment
 
@@ -567,10 +570,10 @@ https://bartoszgebarowski.github.io/guess-a-word/
 
 ### Media
 
-Logo
+* Logo
   * https://www.nicepng.com/maxp/u2w7o0a9y3o0i1r5/
   * https://www.subpng.com/png-1ohhrp/
-Error 404 logo 
+* Error 404 logo 
   * https://www.clipartmax.com/middle/m2i8H7i8b1K9K9A0_cartoon-confuse-eye-mad-funny-confusion-pr-karikat%C3%BCr-g%C3%B6z-png/
 
 [Back to Table of contents](#table-of-contents)
